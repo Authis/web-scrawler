@@ -39,19 +39,33 @@ public class WebCrawlerRest {
  		/*StringBuilder sb = new StringBuilder();
 		URLConnection urlConn = null;
 		InputStreamReader in = null;*/
+		
+		String arr[] = url.split("://");
+		System.out.println(">>>>"+arr[1]);
+		String domineStr = arr[1];
 
 		try {
 		 
-			 Connection connection = Jsoup.connect(url);
-				connection.timeout(20000);
-				Document doc = connection.get();
-				//System.out.println(doc);		 
-				 
-				Elements questions = doc.select("a[href]");
-				for(Element link: questions){
-					System.out.println("All Sub URLS----:  " +link);
-						 
+			Connection connection = Jsoup.connect(url);
+			connection.timeout(20000);
+			Document doc = connection.get();
+			//System.out.println(doc);		 
+			 
+			Elements questions = doc.select("a");
+			for(Element link: questions){
+				//System.out.println("Link 1: " + link);
+				String urlValue = link.attr("href");
+				if(urlValue.indexOf(domineStr) >= 0){
+					System.out.println("11111111 :  " +link.attr("href") );
+					
+				}else{
+					
+					System.out.println("22222222 :  " +link.attr("href") );
 				}
+				
+				//System.out.println("Link Name: " + link.text());
+					 
+			}
 			
 			/*URL url1 = new URL(url);
 			urlConn = url1.openConnection();
