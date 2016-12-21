@@ -10,7 +10,7 @@
 
  <table>
  <tr>
- 
+ <td> </td>
  </tr>
  <tr>
 	<td>Input URL:</td>
@@ -21,14 +21,22 @@
  </tr>  
  </table>
  
- <table border="1"> 
+ <table   ng-repeat="value in urlValues" ng-if="value.DOM == 'ERROR'"> 
+	 <tr>
+		  <td>{{value.VALUE}}</td>
+		   
+	 </tr>
+ 
+ 
+ </table>
+  <table border="1" ng-if="error == 'N'"> 
 	 <tr>
 		  <td>Domain URL</td>
 		  <td>Other URL</td>
 	 </tr>
  <tr>
 	 <td>
-		 <table ng-repeat="value in urlValues['urllist']"> 
+		 <table ng-repeat="value in urlValues"> 
 			 <tr>
 				 <td ng-if="value.DOM == 'NATIVE'">
 				     <a ng-href="{{value.VALUE}}" target="_blank">{{value.VALUE}} </a>
@@ -37,7 +45,7 @@
 		 </table>
 	 </td>
 	 <td>
-		  <table ng-repeat="value in urlValues['urllist']" ng-if="value.DOM == 'OTHER'"> 
+		  <table ng-repeat="value in urlValues" ng-if="value.DOM == 'OTHER'"> 
 			 <tr>
 				 <td >
 				    <a ng-href="{{value.VALUE}}" target="_blank">{{value.VALUE}} </a>
@@ -46,8 +54,8 @@
 		 </table>
 	</td>
  </tr>
- </table>
  
+ </table>
  
   </div>
  
