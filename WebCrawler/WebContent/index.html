@@ -5,18 +5,50 @@
  <head> 
   <title>Document</title>
  </head>
- <body>
-<div  ng-app="wcApp">
- <table ng-controller="startCrawel">
+ <body   ng-app="wcApp">
+<div  ng-controller="startCrawel">
+
+ <table>
+ <tr>
+ 
+ </tr>
  <tr>
 	<td>Input URL:</td>
-	<td><input type="text" name="txtURL"  ng-model="txtURL"></td>	 
+	<td><input type="text" name="txtURL" ng-model="txtURL"></td>	 
  </tr>
   <tr>
 	<td colspan="2" align="middle"> <input type="button" value="StartCrawle..." ng-click="loadUrls();" ></td>	 
- </tr>
- 
+ </tr>  
  </table>
+ 
+ <table border="1"> 
+	 <tr>
+		  <td>Domain URL</td>
+		  <td>Other URL</td>
+	 </tr>
+ <tr>
+	 <td>
+		 <table ng-repeat="value in urlValues['urllist']"> 
+			 <tr>
+				 <td ng-if="value.DOM == 'NATIVE'">
+				     <a ng-href="{{value.VALUE}}" target="_blank">{{value.VALUE}} </a>
+				  </td>
+			  </tr>
+		 </table>
+	 </td>
+	 <td>
+		  <table ng-repeat="value in urlValues['urllist']" ng-if="value.DOM == 'OTHER'"> 
+			 <tr>
+				 <td >
+				    <a ng-href="{{value.VALUE}}" target="_blank">{{value.VALUE}} </a>
+				 </td>
+			 </tr>
+		 </table>
+	</td>
+ </tr>
+ </table>
+ 
+ 
   </div>
  
  </body>
