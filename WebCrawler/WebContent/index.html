@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="js/script.js"></script>
+ <head> 
+  <title>Document</title>
+ </head>
+ <body>
+<div  ng-app="wcApp">
+ <table ng-controller="startCrawel">
+ <tr>
+	<td>Input URL:</td>
+	<td><input type="text" name="txtURL"  ng-model="txtURL"></td>	 
+ </tr>
+  <tr>
+	<td colspan="2" align="middle"> <input type="button" value="StartCrawle..." ng-click="loadUrls();" ></td>	 
+ </tr>
+ 
+ </table>
+  </div>
+ 
+ </body>
+</html>
