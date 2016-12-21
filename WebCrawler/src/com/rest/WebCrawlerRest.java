@@ -34,67 +34,39 @@ public class WebCrawlerRest {
 	@Produces(MediaType.TEXT_HTML)
 	public String WCRESTService(String url) {
  
-		String returnStr = "CCCC";		 
+		  
 		System.out.println("Input URL >> "+url);
  		/*StringBuilder sb = new StringBuilder();
 		URLConnection urlConn = null;
 		InputStreamReader in = null;*/
-		
+		String urlValue = "";
 		String arr[] = url.split("://");
 		System.out.println(">>>>"+arr[1]);
 		String domineStr = arr[1];
-
+		 StringBuilder JSON =new StringBuilder();
 		try {
 		 
 			Connection connection = Jsoup.connect(url);
 			connection.timeout(20000);
 			Document doc = connection.get();
-			//System.out.println(doc);		 
-			 
-			Elements questions = doc.select("a");
-			for(Element link: questions){
-				//System.out.println("Link 1: " + link);
-				String urlValue = link.attr("href");
+			Elements questions = doc.select("a");			
+			JSON.append("{'urllist': [");			
+			for(Element link: questions){				 
+				urlValue = link.attr("href");
 				if(urlValue.indexOf(domineStr) >= 0){
-					System.out.println("11111111 :  " +link.attr("href") );
-					
-				}else{
-					
-					System.out.println("22222222 :  " +link.attr("href") );
-				}
-				
-				//System.out.println("Link Name: " + link.text());
-					 
-			}
-			
-			/*URL url1 = new URL(url);
-			urlConn = url1.openConnection();
-			if (urlConn != null)
-				urlConn.setReadTimeout(60 * 1000);
-			if (urlConn != null && urlConn.getInputStream() != null) {
-				in = new InputStreamReader(urlConn.getInputStream(),
-						Charset.defaultCharset());
-				BufferedReader bufferedReader = new BufferedReader(in);
-				if (bufferedReader != null) {
-					int cp;
-					while ((cp = bufferedReader.read()) != -1) {
-						System.out.println(((char) cp);
-					}
-					bufferedReader.close();
-				}
-			}
-		in.close();
-*/
-	             
-	            
-			
-			
-			
-			 
+					//System.out.println("11111111 :  " +link.attr("href") );	
+					 JSON.append("{'DOM':'NATIVE','VALUE':"+urlValue+"}");
+				}else{					
+					//System.out.println("22222222 :  " +link.attr("href") );
+					JSON.append("{'DOM':'OTHER','VALUE':'"+urlValue+"'}");
+				} 
+				JSON.append(",");
+			}			
+		    JSON.append("]}");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return returnStr;
+		return JSON.toString();
 	}
 
 }
